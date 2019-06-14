@@ -47,12 +47,29 @@ To start using Facepointer, you'll need to instantiate it with: `const fp = new 
 ```js
 ```
 
+Each instantiation creates it's own "debugger", which contains the following:
+
+```html
+<div class="facepointer-debugger">
+  <canvas></canvas>
+</div>
+```
+
 ## Body Classes
 The following `<body>` classes are used throughout the lifecycle of facepointer:
 
 ```bash
 # Called anytime facepointer is making an AJAX request or injecting depdencies
 body.facepointer-loading
+```
+
+## Events
+The following public events are available on `document` with `document.addEventListener(eventName)`:
+
+```bash
+# Called after the dependencies are loaded and ready
+# @see Facepointer.prototype.loadDependencies
+facepointer-dependenciesReady
 ```
 
 ## Properties
