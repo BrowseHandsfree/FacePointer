@@ -32,7 +32,7 @@ class Facepointer {
   /**
    * Starts the tracking loop
    */
-  startTracking () {
+  start () {
     console.log('start tracking')
   }
 }

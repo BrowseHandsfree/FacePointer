@@ -16,7 +16,7 @@ Facepointer.prototype.setup = function (config) {
  */
 Facepointer.prototype.addListeners = function () {
   // Maybe autostart
-  this.on('dependenciesReady', () => {this.config.autostart && this.startTracking()})
+  this.on('dependenciesReady', () => {this.config.autostart && this.start()})
 }
 
 /**
