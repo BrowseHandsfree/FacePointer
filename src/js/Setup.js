@@ -4,10 +4,19 @@ let loadedDeps = false
 /**
  * Entry point to setting up this instance
  */
-Facepointer.prototype.setup = function () {
+Facepointer.prototype.setup = function (config) {
+  this.addListeners()
+  this.cleanConfig(config)
   this.loadDependencies()
-  this.cleanConfig()
   this.createDebugger()
+}
+
+/**
+ * Add event listeners
+ */
+Facepointer.prototype.addListeners = function () {
+  // Maybe autostart
+  this.on('dependenciesReady', () => {this.config.autostart && this.startTracking()})
 }
 
 /**
@@ -16,7 +25,7 @@ Facepointer.prototype.setup = function () {
 Facepointer.prototype.cleanConfig = function (config) {
   this._config = config
   config = Object.assign({
-
+    autostart: false
   }, config)
   this.config = config
 }

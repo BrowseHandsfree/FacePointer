@@ -1,7 +1,7 @@
-import './styles/main.styl'
-
 /**
+ * (∩｀-´)⊃━☆ﾟ.*・｡ﾟ Facepointer
  * 
+ * @usage const fp = new Facepointer(config);
  */
 class Facepointer {
   /**
@@ -28,8 +28,16 @@ class Facepointer {
   on (eventName, callback) {
     document.addEventListener(eventName, callback)
   }
+
+  /**
+   * Starts the tracking loop
+   */
+  startTracking () {
+    console.log('start tracking')
+  }
 }
 
 window.Facepointer = Facepointer
+require('./styles/main.styl')
 require('./js/Setup')
 console.log('(∩｀-´)⊃━☆ﾟ.*・｡ﾟ https://github.com/browsehandsfree/facepointer')

@@ -55,6 +55,8 @@ Each instantiation creates it's own "debugger", which contains the following:
 </div>
 ```
 
+---
+
 ## Body Classes
 The following `<body>` classes are used throughout the lifecycle of facepointer:
 
@@ -72,6 +74,18 @@ The following public events are available on `document` with `document.addEventL
 facepointer-dependenciesReady
 ```
 
+You can emit events with `fp.emit(eventName, data)`, which is a shorthand for:
+
+```js
+document.dispatchEvent(new CustomEvent(`facepointer-${evenName}`), detail: data)
+```
+
+You can listen to events with `fp.on(eventName, callback)`, which is also shorthand for:
+
+```js
+document.addEventListener(`facepointer-${eventName}`, callback)
+```
+
 ## Properties
 The following properties are available:
 
@@ -80,4 +94,16 @@ The following properties are available:
 fp._config
 // The cleaned config object with their defaults
 fp.config
+```
+
+---
+
+# Config
+```js
+let config = {
+  // Whether Facepointer should automatically start after instantiation
+  autostart: false
+}
+
+const fp = new Facepointer(config)
 ```
