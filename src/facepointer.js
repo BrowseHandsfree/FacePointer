@@ -1,29 +1,17 @@
 import './styles/main.styl'
 
-// Whether we've loaded dependencies yet
-let loadedDeps = false
-
 /**
  * 
  */
-class FacePointer {
+class Facepointer {
   /**
    * @param {Object} config The config object (see README)
    */
   constructor (config = {}) {
-    this.setup()
-  }
-
-  /**
-   * Sets up variables
-   */
-  setup () {
-    if (!loadedDeps) {
-      loadedDeps = true
-      console.log('loaded')
-    }
+    this.setup(config)
   }
 }
 
-window.FacePointer = FacePointer
+window.Facepointer = Facepointer
+require('./js/Setup')
 console.log('(∩｀-´)⊃━☆ﾟ.*・｡ﾟ https://github.com/browsehandsfree/facepointer')

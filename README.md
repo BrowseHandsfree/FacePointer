@@ -15,7 +15,7 @@
 
 ---
 
-# Local Development
+# Local Development Setup
 ## Prereqs
 - First install [NodeJS](https://nodejs.org/en/download/) and [git](https://git-scm.com/downloads)
 - Then install [Parcel.js](https://parceljs.org/) globally with: `npm install -g parcel-bundler`
@@ -35,4 +35,32 @@ After you have dependencies installed, you'll be able to run the following:
 ```bash
 # Start a local development server on localhost:1234
 npm start
+```
+
+---
+
+## Instantiation
+To start using Facepointer, you'll need to instantiate it with: `const fp = new Facepointer(config)`
+
+`config` has the following defaults:
+
+```js
+```
+
+## Body Classes
+The following `<body>` classes are used throughout the lifecycle of facepointer:
+
+```bash
+# Called anytime facepointer is making an AJAX request or injecting depdencies
+body.facepointer-loading
+```
+
+## Properties
+The following properties are available:
+
+```js
+// The original config object passed during instantiation
+fp._config
+// The cleaned config object with their defaults
+fp.config
 ```
