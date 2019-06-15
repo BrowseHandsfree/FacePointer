@@ -33,37 +33,30 @@ class Facepointer {
    * Starts the tracking loop
    */
   start () {
-    // First, let's load the model JSON
     if (this.trackerSDK) {
-      const url = 'js/jeelizFaceTransferNNC.json'
-      fetch('js/jeelizFaceTransferNNC.json')
-      .then(model => {
-        return model.json()
-      })
-      // Next, let's initialize the head tracker API
-      .then(model => {
-        this.trackerHelper.size_canvas({
-          canvasId: `facepointer-canvas-${this.id}`,
-          callback: videoSettings => {
-            this.trackerSDK.init({
-              canvasId: `facepointer-canvas-${this.id}`,
-              NNCpath: JSON.stringify(model),
-              videoSettings,
-              callbackReady: () => {
-                console.log('ready')
-              }
-            })
-          }
-        })
-      })
-      .catch(() => console.error(`Couldn't load head tracking model at ${url}`))
+      this.initSDK()
     } else {
       console.warn('Head tracking SDK not loaded yet')
     }
+  }
+
+  /**
+   * The main tracking loop
+   */
+  track () {
+    this.head = {
+      rotation: this.trackerSDK.get_rotationStabilized(),
+      translation: this.trackerSDK.get_positionScale(),
+      morphs: this.trackerSDK.get_morphTargetInfluencesStabilized()
+    }
+    this.updatePointer()
+
+    requestAnimationFrame(() => this.track())
   }
 }
 
 window.Facepointer = Facepointer
 require('./styles/main.styl')
 require('./js/Setup')
+require('./js/Pointer')
 console.log('(∩｀-´)⊃━☆ﾟ.*・｡ﾟ https://github.com/browsehandsfree/facepointer')

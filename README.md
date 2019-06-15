@@ -90,6 +90,14 @@ document.addEventListener(`facepointer-${eventName}`, callback)
 The following properties are available:
 
 ```js
+fp.pointer = {
+  // The inferred pointer position
+  x: 0,
+  y: 0,
+  // The pointer DIV element
+  $el: null
+}
+
 // The original config object passed during instantiation
 fp._config
 // The cleaned config object with their defaults
@@ -110,7 +118,21 @@ fp.trackerSDK = null
 ```js
 let config = {
   // Whether Facepointer should automatically start after instantiation
-  autostart: false
+  autostart: false,
+
+  sensitivity: {
+    // A factor to adjust the cursors move speed by
+    xy: 0.7,
+    // How much wider (+) or narrower (-) a smile needs to be to click
+    click: 0
+  },
+  
+  stabilizer: {
+    // How much stabilization to use: 0 = none, 3 = heavy
+    factor: 1,
+    // Number of frames to stabilizer over
+    buffer: 30
+  }
 }
 
 const fp = new Facepointer(config)

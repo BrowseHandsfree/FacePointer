@@ -9,6 +9,7 @@ Facepointer.prototype.setup = function (config) {
   this.initProps()
   this.loadDependencies()
   this.createDebugger()
+  this.createPointer()
 }
 
 /**
@@ -30,7 +31,19 @@ Facepointer.prototype.cleanConfig = function (config) {
   this._config = config
   config = Object.assign({
     // Whether Facepointer should automatically start after instantiation
-    autostart: false
+    autostart: false,
+    sensitivity: {
+      // A factor to adjust the cursors move speed by
+      xy: 0.7,
+      // How much wider (+) or narrower (-) a smile needs to be to click
+      click: 0
+    },
+    stabilizer: {
+      // How much stabilization to use: 0 = none, 3 = heavy
+      factor: 1,
+      // Number of frames to stabilizer over
+      buffer: 30
+    }
   }, config)
   this.config = config
 }
@@ -42,6 +55,18 @@ Facepointer.prototype.initProps = function () {
   Facepointer.numInstances = Facepointer.numInstances ? Facepointer.numInstances + 1 : 1
   this.id = Facepointer.numInstances
   this.trackerSDK = null
+  this.pointer = {
+    x: 0,
+    y: 0,
+    $el: null
+  }
+  this.tween = {
+    x: -1,
+    y: -1,
+    rx: 0,
+    ry: 0,
+    positionList: []
+  }
 }
 
 /**
@@ -76,4 +101,44 @@ Facepointer.prototype.createDebugger = function () {
   $wrap.appendChild($canvas)
 
   document.body.appendChild($wrap)
+}
+
+/**
+ * Creates the cursor/pointer
+ */
+Facepointer.prototype.createPointer = function () {
+  const $pointer = document.createElement('DIV')
+  $pointer.classList.add('facepointer-pointer')
+  this.pointer.$el = $pointer
+
+  document.body.appendChild($pointer)
+}
+
+/**
+ * Initializes the head tracker SDK
+ */
+Facepointer.prototype.initSDK = function () {
+  const url = 'js/jeelizFaceTransferNNC.json'
+  fetch('js/jeelizFaceTransferNNC.json')
+  .then(model => {
+    return model.json()
+  })
+  // Next, let's initialize the head tracker API
+  .then(model => {
+    this.trackerHelper.size_canvas({
+      canvasId: `facepointer-canvas-${this.id}`,
+      callback: videoSettings => {
+        this.trackerSDK.init({
+          canvasId: `facepointer-canvas-${this.id}`,
+          NNCpath: JSON.stringify(model),
+          videoSettings,
+          callbackReady: () => {
+            console.log('ready')
+            this.track()
+          }
+        })
+      }
+    })
+  })
+  .catch(() => console.error(`Couldn't load head tracking model at ${url}`))
 }
