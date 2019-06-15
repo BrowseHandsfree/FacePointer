@@ -33,7 +33,33 @@ class Facepointer {
    * Starts the tracking loop
    */
   start () {
-    console.log('start tracking')
+    // First, let's load the model JSON
+    if (this.trackerSDK) {
+      const url = 'js/jeelizFaceTransferNNC.json'
+      fetch('js/jeelizFaceTransferNNC.json')
+      .then(model => {
+        return model.json()
+      })
+      // Next, let's initialize the head tracker API
+      .then(model => {
+        this.trackerHelper.size_canvas({
+          canvasId: `facepointer-canvas-${this.id}`,
+          callback: videoSettings => {
+            this.trackerSDK.init({
+              canvasId: `facepointer-canvas-${this.id}`,
+              NNCpath: JSON.stringify(model),
+              videoSettings,
+              callbackReady: () => {
+                console.log('ready')
+              }
+            })
+          }
+        })
+      })
+      .catch(() => console.error(`Couldn't load head tracking model at ${url}`))
+    } else {
+      console.warn('Head tracking SDK not loaded yet')
+    }
   }
 }
 

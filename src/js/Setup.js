@@ -1,5 +1,4 @@
 const Facepointer = window.Facepointer
-let loadedDeps = false
 
 /**
  * Entry point to setting up this instance
@@ -7,6 +6,7 @@ let loadedDeps = false
 Facepointer.prototype.setup = function (config) {
   this.addListeners()
   this.cleanConfig(config)
+  this.initProps()
   this.loadDependencies()
   this.createDebugger()
 }
@@ -16,7 +16,11 @@ Facepointer.prototype.setup = function (config) {
  */
 Facepointer.prototype.addListeners = function () {
   // Maybe autostart
-  this.on('dependenciesReady', () => {this.config.autostart && this.start()})
+  this.on('dependenciesReady', () => {
+    this.trackerSDK = window.JEEFACETRANSFERAPI
+    this.trackerHelper = window.JEELIZ_RESIZER
+    this.config.autostart && this.start()
+  })
 }
 
 /**
@@ -25,20 +29,29 @@ Facepointer.prototype.addListeners = function () {
 Facepointer.prototype.cleanConfig = function (config) {
   this._config = config
   config = Object.assign({
+    // Whether Facepointer should automatically start after instantiation
     autostart: false
   }, config)
   this.config = config
 }
 
 /**
+ * Initialize properties
+ */
+Facepointer.prototype.initProps = function () {
+  Facepointer.numInstances = Facepointer.numInstances ? Facepointer.numInstances + 1 : 1
+  this.id = Facepointer.numInstances
+  this.trackerSDK = null
+}
+
+/**
  * Load the Weboji head tracker
  */
 Facepointer.prototype.loadDependencies = function () {
-  if (!loadedDeps) {
+  if (!this.trackerSDK) {
     const $script = document.createElement('script')
     $script.async = true
     $script.onload = () => {
-      loadedDeps = true
       document.body.classList.remove('facepointer-loading')
       this.emit('dependenciesReady')
     }
@@ -59,6 +72,7 @@ Facepointer.prototype.createDebugger = function () {
   
   const $canvas = document.createElement('CANVAS')
   $canvas.classList.add('facepointer-canvas')
+  $canvas.setAttribute('id', `facepointer-canvas-${this.id}`)
   $wrap.appendChild($canvas)
 
   document.body.appendChild($wrap)

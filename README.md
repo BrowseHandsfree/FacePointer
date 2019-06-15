@@ -94,6 +94,14 @@ The following properties are available:
 fp._config
 // The cleaned config object with their defaults
 fp.config
+
+// Number of instances
+Facepointer.numInstances = 0
+// Instance id (the first instance is 1, the second is 2, and so on)
+fp.id
+
+// Contains the JEELIZ tracker library once it's been injected
+fp.trackerSDK = null
 ```
 
 ---
