@@ -101,17 +101,23 @@ The following classes are used throughout the lifecycle of facepointer:
 ```bash
 # Added anytime facepointer is making an AJAX request or injecting depdencies
 body.facepointer-loading
-
 # Added after `fp.start()` and just before the actual first frame
 body.facepoitner-started
 
 # Add to an element to initialize (if one isn't initialized) and start the latest instance on click
 # These elements are automatically hidden when started
+# NOTE: this will work if a child at most 5 deep is clicked too
 .facepointer-start
 
 # Add to an element to reload the page (effectively stopping inference)
 # These elements are hidden until started
+# NOTE: this will work if a child at most 5 deep is clicked too
 .facepointer-stop
+
+# Hidden while loading
+.facepointer-hide-when-loading
+# Show while loading
+.facepointer-show-when-loading
 ```
 
 ## Events
