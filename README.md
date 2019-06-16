@@ -10,6 +10,26 @@
 
 ---
 
+# Using
+
+> 🙈 Facepointer currently only works via CDN because of the way we're bundling dependencies. This will be fixed soon so that you can `import Facepointer from 'facepointer'`
+
+To use Facepointer in your projects add the following to your projects `<head>`:
+
+```html
+<link rel="stylesheet" href="https://unpkg.com/facepointer/dist/facepointer.css">
+<script defer src="https://unpkg.com/facepointer/dist/facepointer.js"></script>
+```
+
+That will pull the latest build. If you'd like to instead use a specific version, use something like:
+
+```html
+<link rel="stylesheet" href="https://unpkg.com/facepointer@0.0.3/dist/facepointer.css">
+<script defer src="https://unpkg.com/facepointer@0.0.3/dist/facepointer.js"></script>
+```
+
+---
+
 > ## 🏗 Work in Progress
 > This project is not ready yet but will be soon. Follow us on [Twitter @browsehandsfree](https://twitter.com/browsehandsfree) to stay updated
 
