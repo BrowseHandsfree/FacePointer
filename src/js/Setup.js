@@ -52,8 +52,13 @@ Facepointer.prototype.cleanConfig = function (config) {
  * Initialize properties
  */
 Facepointer.prototype.initProps = function () {
-  Facepointer.numInstances = Facepointer.numInstances ? Facepointer.numInstances + 1 : 1
-  this.id = Facepointer.numInstances
+  if (!Facepointer.instances) {
+    Facepointer.instances = [this]
+  } else {
+    Facepointer.instances.push(this)
+  }
+  
+  this.id = Facepointer.instances.length
   this.trackerSDK = null
   this.pointer = {
     x: 0,
