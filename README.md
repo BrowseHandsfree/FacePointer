@@ -80,9 +80,8 @@ npm start
 ## Instantiation
 To start using Facepointer, you'll need to instantiate it with: `const fp = new Facepointer(config)`
 
-`config` has the following defaults:
-
 ```js
+new Facepointer({autostart: true})
 ```
 
 Each instantiation creates it's own "debugger", which contains the following:
