@@ -81,8 +81,11 @@ Each instantiation creates it's own "debugger", which contains the following:
 The following `<body>` classes are used throughout the lifecycle of facepointer:
 
 ```bash
-# Called anytime facepointer is making an AJAX request or injecting depdencies
+# Added anytime facepointer is making an AJAX request or injecting depdencies
 body.facepointer-loading
+
+# Added after `fp.start()` and just before the actual first frame
+body.facepoitner-started
 ```
 
 ## Events

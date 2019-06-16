@@ -119,6 +119,7 @@ Facepointer.prototype.createPointer = function () {
  */
 Facepointer.prototype.initSDK = function () {
   const url = Facepointer.libSrc + 'js/jeelizFaceTransferNNC.json'
+  document.body.classList.add('facepointer-loading')
   fetch(url)
   .then(model => {
     return model.json()
@@ -133,7 +134,8 @@ Facepointer.prototype.initSDK = function () {
           NNCpath: JSON.stringify(model),
           videoSettings,
           callbackReady: () => {
-            console.log('ready')
+            document.body.classList.remove('facepointer-loading')
+            document.body.classList.add('facepointer-started')
             this.track()
           }
         })
