@@ -1,13 +1,17 @@
 {
   "name": "facepointer",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Use head tracking and face gestures to move a \"mouse\" pointer from up to 3m (10ft) away 👋",
-  "main": "src/facepointer.js",
+  "main": "dist/facepointer.js",
   "scripts": {
     "start": "parcel src/index.html",
-    "build": "parcel build src/index.html",
+    "build": "parcel build src/facepointer.js --no-content-hash",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "browserslist": [
+    "> 1%",
+    "not ie <= 9"
+  ],
   "staticFiles": {
     "staticPath": "public",
     "watcherGlob": "**"

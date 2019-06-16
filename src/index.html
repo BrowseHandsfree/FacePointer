@@ -8,6 +8,12 @@
   <link rel="stylesheet" href="styles/sandbox.styl">
 </head>
 <body>
+  <button onclick="startApp()">Start</button>
   <script src="facepointer.js"></script>
+  <script>
+    function startApp () {
+      window.fp = new Facepointer({autostart: true})
+    }
+  </script>
 </body>
 </html>
