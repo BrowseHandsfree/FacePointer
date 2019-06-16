@@ -40,6 +40,11 @@ class Facepointer {
     }
   }
 
+
+  stop () {
+    location.reload()
+  }
+
   /**
    * The main tracking loop
    */
