@@ -1,2 +1,16 @@
-*
-  box-sizing: border-box
+$pointerSize = 20px
+
+.facepointer-pointer
+  width $pointerSize
+  height $pointerSize
+  border-radius $pointerSize
+  background red
+  position fixed
+  top 0
+  left 0
+  z-index 999999
+  display none
+
+.facepointer-started
+  .facepointer-pointer
+    display block
