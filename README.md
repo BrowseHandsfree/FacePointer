@@ -1,5 +1,6 @@
 <div align="center">
   <p><img src="https://i.imgur.com/yu0VPuu.png" width=64></p>
+  <p><img src="https://media.giphy.com/media/kDrhIUpyj29ndpLRXH/source.gif"></p>
   <p>
     <small>presented by <a href="https://browsehandsfree.com">browsehandsfree.com</a></small>
     <br><small>with a special thanks to <a href="http://studioforcreativeinquiry.org/">the STUDIO for Creative Inquiry at CMU</a></small>
@@ -79,9 +80,8 @@ npm start
 ## Instantiation
 To start using Facepointer, you'll need to instantiate it with: `const fp = new Facepointer(config)`
 
-`config` has the following defaults:
-
 ```js
+new Facepointer({autostart: true})
 ```
 
 Each instantiation creates it's own "debugger", which contains the following:
@@ -94,15 +94,29 @@ Each instantiation creates it's own "debugger", which contains the following:
 
 ---
 
-## Body Classes
-The following `<body>` classes are used throughout the lifecycle of facepointer:
+## Classes
+The following classes are used throughout the lifecycle of facepointer:
 
 ```bash
 # Added anytime facepointer is making an AJAX request or injecting depdencies
 body.facepointer-loading
-
 # Added after `fp.start()` and just before the actual first frame
 body.facepoitner-started
+
+# Add to an element to initialize (if one isn't initialized) and start the latest instance on click
+# These elements are automatically hidden when started
+# NOTE: this will work if a child at most 5 deep is clicked too
+.facepointer-start
+
+# Add to an element to reload the page (effectively stopping inference)
+# These elements are hidden until started
+# NOTE: this will work if a child at most 5 deep is clicked too
+.facepointer-stop
+
+# Hidden while loading
+.facepointer-hide-when-loading
+# Show while loading
+.facepointer-show-when-loading
 ```
 
 ## Events
@@ -183,3 +197,22 @@ let config = {
 
 const fp = new Facepointer(config)
 ```
+
+---
+
+# Integrations
+## WordPress
+In oder to integrate this repository directly with WordPress, you'll first need to install [WP Pusher](https://wppusher.com/). Then, use the following settings (located at `/wp-admin/admin.php?page=wppusher-plugins-create`):
+
+```bash
+Plugin repository: "browsehandsfree/facepointer"
+Repository branch: "master"
+Repository subdirectory: "integrations/wordpress"
+```
+
+![](https://i.imgur.com/vOpLzLq.png)
+
+## Todo
+- P5.js
+- aFrame
+- Babylon.js

@@ -14,3 +14,29 @@ $pointerSize = 20px
 .facepointer-started
   .facepointer-pointer
     display block
+
+// Loading states
+.facepointer-show-when-loading
+  display none
+
+.facepointer-loading
+  .facepointer-hide-when-loading
+    display none
+
+  .facepointer-show-when-loading
+    display block
+    &a, &button, &span
+      display inline-block
+
+// Buttons
+.facepointer-stop
+  display none
+
+.facepointer-started
+  .facepointer-start
+    display none
+  
+  .facepointer-stop
+    display block
+    &a, &button, &span
+      display inline-block
