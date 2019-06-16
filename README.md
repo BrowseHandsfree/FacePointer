@@ -10,8 +10,9 @@
 
 ---
 
-# Using
+# Using in HTML
 
+## Setup
 > 🙈 Facepointer currently only works via CDN because of the way we're bundling dependencies. This will be fixed soon so that you can `import Facepointer from 'facepointer'`
 
 To use Facepointer in your projects add the following to your projects `<head>`:
@@ -26,6 +27,22 @@ That will pull the latest build. If you'd like to instead use a specific version
 ```html
 <link rel="stylesheet" href="https://unpkg.com/facepointer@0.0.3/dist/facepointer.css">
 <script defer src="https://unpkg.com/facepointer@0.0.3/dist/facepointer.js"></script>
+```
+
+## .facepointer-start
+
+To start tracking, give an element like a button `.facepointer-start` class. Clicking it will either execute `new Facepointer({autostart: true})` if Facepointer hasn't been initialized yet or simply call the `.start()` method of the last Facepointer instance.
+
+You can also programmatically start Facepointer with:
+
+```js
+// With autostart
+const fp = new Facepointer({autostart: true})
+
+// Without autostart first run...
+const fp = new Facepointer(config)
+// ...then
+fp.start()
 ```
 
 ---
@@ -136,6 +153,9 @@ Facepointer.libSrc
 
 // Contains the JEELIZ tracker library once it's been injected
 fp.trackerSDK = null
+
+// Whether we're tracking or not
+fp.isStarted = false
 ```
 
 ---

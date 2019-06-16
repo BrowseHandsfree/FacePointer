@@ -4,24 +4,12 @@ const Facepointer = window.Facepointer
  * Entry point to setting up this instance
  */
 Facepointer.prototype.setup = function (config) {
-  this.addListeners()
+  this.addListeners() // @see ./Listeners.js
   this.cleanConfig(config)
   this.initProps()
   this.loadDependencies()
   this.createDebugger()
   this.createPointer()
-}
-
-/**
- * Add event listeners
- */
-Facepointer.prototype.addListeners = function () {
-  // Maybe autostart
-  this.on('dependenciesReady', () => {
-    this.trackerSDK = window.JEEFACETRANSFERAPI
-    this.trackerHelper = window.JEELIZ_RESIZER
-    this.config.autostart && this.start()
-  })
 }
 
 /**
@@ -52,12 +40,7 @@ Facepointer.prototype.cleanConfig = function (config) {
  * Initialize properties
  */
 Facepointer.prototype.initProps = function () {
-  if (!Facepointer.instances) {
-    Facepointer.instances = [this]
-  } else {
-    Facepointer.instances.push(this)
-  }
-  
+  Facepointer.instances.push(this)
   this.id = Facepointer.instances.length
   this.trackerSDK = null
   this.pointer = {
@@ -141,6 +124,7 @@ Facepointer.prototype.initSDK = function () {
           callbackReady: () => {
             document.body.classList.remove('facepointer-loading')
             document.body.classList.add('facepointer-started')
+            this.isStarted = true
             this.track()
           }
         })
