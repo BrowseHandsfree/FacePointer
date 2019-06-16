@@ -108,6 +108,9 @@ Facepointer.numInstances = 0
 // Instance id (the first instance is 1, the second is 2, and so on)
 fp.id
 
+// document.currentScript as run from inside Facepointer (used for calling dependencies)
+Facepointer.libSrc
+
 // Contains the JEELIZ tracker library once it's been injected
 fp.trackerSDK = null
 ```

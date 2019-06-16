@@ -80,7 +80,7 @@ Facepointer.prototype.loadDependencies = function () {
       document.body.classList.remove('facepointer-loading')
       this.emit('dependenciesReady')
     }
-    $script.src = 'js/jeelizFaceTransfer.js'
+    $script.src = Facepointer.libSrc + 'js/jeelizFaceTransfer.js'
     document.getElementsByTagName('head')[0].appendChild($script)
     document.body.classList.add('facepointer-loading')
   } else {
@@ -118,8 +118,8 @@ Facepointer.prototype.createPointer = function () {
  * Initializes the head tracker SDK
  */
 Facepointer.prototype.initSDK = function () {
-  const url = 'js/jeelizFaceTransferNNC.json'
-  fetch('js/jeelizFaceTransferNNC.json')
+  const url = Facepointer.libSrc + 'js/jeelizFaceTransferNNC.json'
+  fetch(url)
   .then(model => {
     return model.json()
   })

@@ -34,7 +34,7 @@
   "homepage": "https://github.com/browsehandsfree/facepointer#readme",
   "devDependencies": {
     "cssnano": "^4.1.10",
-    "parcel-plugin-clean-dist": "0.0.6",
+    "parcel-plugin-nuke-dist": "^1.0.0",
     "parcel-plugin-static-files-copy": "^2.1.2",
     "stylus": "^0.54.5"
   }

@@ -55,8 +55,15 @@ class Facepointer {
   }
 }
 
+// Set the lib path to whereever this file is, this is required for loading dependencies correctly
+let libSrc = document.currentScript.getAttribute('src')
+libSrc = libSrc.substr(0, libSrc.lastIndexOf('/') + 1)
+Facepointer.libSrc = libSrc
+
 window.Facepointer = Facepointer
 require('./styles/main.styl')
 require('./js/Setup')
 require('./js/Pointer')
 console.log('(∩｀-´)⊃━☆ﾟ.*・｡ﾟ https://github.com/browsehandsfree/facepointer')
+
+export default Facepointer
