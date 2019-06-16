@@ -1,6 +1,6 @@
 {
   "name": "facepointer",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Use head tracking and face gestures to move a \"mouse\" pointer from up to 3m (10ft) away 👋",
   "main": "dist/facepointer.js",
   "scripts": {
