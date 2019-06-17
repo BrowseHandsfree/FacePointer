@@ -6,3 +6,6 @@
 Facepointer.use = function (name, callback) {
   Facepointer.plugins[name] = callback
 }
+
+// Import core plugins
+require('./plugins/vertScroll')
