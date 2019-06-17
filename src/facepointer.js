@@ -58,7 +58,7 @@ class Facepointer {
     this.updatePointer()
     
     Object.keys(Facepointer.plugins).forEach(key => {
-      Facepointer.plugins[key].call(this, this.pointer)
+      Facepointer.plugins[key](this.pointer, this)
     })
     
     requestAnimationFrame(() => this.track())

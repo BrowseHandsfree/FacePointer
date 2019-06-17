@@ -29,6 +29,15 @@ Facepointer.prototype.cleanConfig = function (config) {
       factor: 1,
       // Number of frames to stabilizer over
       buffer: 30
+    },
+    // Configs specific to plugins
+    plugin: {
+      vertScroll: {
+        // The multiplier to scroll by. Lower numbers are slower
+        scrollSpeed: .15,
+        // How many pixels from the the edge to scroll
+        scrollZone: 100
+      }
     }
   }, config)
   this.config = config

@@ -195,6 +195,16 @@ let config = {
     factor: 1,
     // Number of frames to stabilizer over
     buffer: 30
+  },
+
+  // Configs specific to plugins
+  plugin: {
+    vertScroll: {
+      // The multiplier to scroll by. Lower numbers are slower
+      scrollSpeed: .15,
+      // How many pixels from the the edge to scroll
+      scrollZone: 100
+    }
   }
 }
 
@@ -205,10 +215,10 @@ const fp = new Facepointer(config)
 
 # Adding Functionality
 
-Using `Facepointer.use(name, callback)` adds a `callback` to be called on every inference loop for every instance. We call these plugins. The plugin recieves `(pointer)` which contains the pointers current `(x,y)`. Here's a basic example of scrolling the page:
+Using `Facepointer.use(name, callback)` adds a `callback` to be called on every inference loop for every instance. We call these plugins. The plugin recieves `(pointer, fp)` - `pointer` is the pointers current `(x,y)` and `fp` is the Facepointer instance (use `fp.head` to get that instances head pose data, for example). Here's a basic example of scrolling the page:
 
 ```js
-Facepointer.use('verticalScroll', pointer => {
+Facepointer.use('verticalScroll', (pointer, fp) => {
   if (pointer.y < 100)
     window.scrollTo(0, window.scrollY + pointer.y)
   if (pointer.y > window.innerHeight)
