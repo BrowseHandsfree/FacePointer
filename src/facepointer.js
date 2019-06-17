@@ -47,6 +47,7 @@ class Facepointer {
 
   /**
    * The main tracking loop
+   * - Also runs plugins
    */
   track () {
     this.head = {
@@ -55,7 +56,11 @@ class Facepointer {
       morphs: this.trackerSDK.get_morphTargetInfluencesStabilized()
     }
     this.updatePointer()
-
+    
+    Object.keys(Facepointer.plugins).forEach(key => {
+      Facepointer.plugins[key].call(this, this.pointer)
+    })
+    
     requestAnimationFrame(() => this.track())
   }
 }
@@ -67,15 +72,18 @@ class Facepointer {
 let libSrc = document.currentScript.getAttribute('src')
 libSrc = libSrc.substr(0, libSrc.lastIndexOf('/') + 1)
 Facepointer.libSrc = libSrc
+Facepointer.plugins = {}
 
 // Contains the instances
 Facepointer.instances = []
-
 window.Facepointer = Facepointer
+
 require('./styles/main.styl')
 require('./js/Setup')
 require('./js/Pointer')
 require('./js/Listeners')
+require('./js/Plugins')
+
 console.log('(∩｀-´)⊃━☆ﾟ.*・｡ﾟ https://github.com/browsehandsfree/facepointer')
 
 export default Facepointer

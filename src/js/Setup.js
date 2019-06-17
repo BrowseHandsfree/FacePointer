@@ -1,5 +1,3 @@
-const Facepointer = window.Facepointer
-
 /**
  * Entry point to setting up this instance
  */

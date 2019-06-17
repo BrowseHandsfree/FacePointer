@@ -170,6 +170,9 @@ fp.trackerSDK = null
 
 // Whether we're tracking or not
 fp.isStarted = false
+
+// Contains a collection of callbacks to call on every frame
+fp.plugins = []
 ```
 
 ---
@@ -197,6 +200,23 @@ let config = {
 
 const fp = new Facepointer(config)
 ```
+
+---
+
+# Adding Functionality
+
+Using `Facepointer.use(name, callback)` adds a `callback` to be called on every inference loop for every instance. We call these plugins. The plugin recieves `(pointer)` which contains the pointers current `(x,y)`. Here's a basic example of scrolling the page:
+
+```js
+Facepointer.use('verticalScroll', pointer => {
+  if (pointer.y < 100)
+    window.scrollTo(0, window.scrollY + pointer.y)
+  if (pointer.y > window.innerHeight)
+    window.scrollTo(0, window.scrollY + (pointer.y - window.innerHeight))
+})
+```
+
+Using `Facepointer.use()` with the same plugin name overwrites the existing one.
 
 ---
 
