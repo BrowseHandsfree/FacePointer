@@ -32,8 +32,27 @@ Facepointer.use('click', (pointer, fp) => {
     mouseDowned = mouseDrag = mouseDown = false
     document.body.classList.remove('facepointer-clicked')
   }
+
+  // Set the state
+  if (mouseDown) fp.pointer.state = 'mouseDown'
+  else if (mouseUp) fp.pointer.state = 'mouseUp'
+  else if (mouseDrag) fp.pointer.state = 'mouseDrag'
+  else ''
+
+  // Actually click something (or focus it)
+  if (mouseDowned) {
+    const $el = document.elementFromPoint(pointer.x, pointer.y)
+    if ($el) {
+      $el.dispatchEvent(new MouseEvent('click', {
+        bubbles: true,
+        cancelable: true,
+        clientX: pointer.x,
+        clientY: pointer.y
+      }))
+
+      // Focus
+      if (['INPUT', 'TEXTAREA', 'BUTTON', 'A'].includes($el.nodeName))
+        $el.focus()
+    }
+  }
 })
-
-function click () {
-
-}

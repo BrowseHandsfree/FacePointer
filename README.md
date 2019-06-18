@@ -149,7 +149,9 @@ fp.pointer = {
   x: 0,
   y: 0,
   // The pointer DIV element
-  $el: null
+  $el: null,
+  // The pointer state ('mouseDown', 'mouseDrag', 'mouseUp', '')
+  state: ''
 }
 
 // The original config object passed during instantiation
