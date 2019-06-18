@@ -37,5 +37,6 @@
     "parcel-plugin-nuke-dist": "^1.0.0",
     "parcel-plugin-static-files-copy": "^2.1.2",
     "stylus": "^0.54.5"
-  }
+  },
+  "dependencies": {}
 }

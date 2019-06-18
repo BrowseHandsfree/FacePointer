@@ -9,14 +9,21 @@
   <link rel="shortcut icon" href="favicon.png" type="image/png">
 </head>
 <body>
-  <canvas id="paper"></canvas>
   <article>
-    <button class="facepointer-start">
-      <span class="facepointer-hide-when-loading">Start</span>
-      <span class="facepointer-show-when-loading">⏳</span>
-    </button>
-    <button class="facepointer-stop">Stop</button>
+    <p>
+      <button class="facepointer-start">
+        <span class="facepointer-hide-when-loading">Start</span>
+        <span class="facepointer-show-when-loading">⏳</span>
+      </button>
+      <button class="facepointer-stop">Stop</button>
+    </p>
+
+    <p>Click within this area draw:</p>
+    <canvas id="paper"></canvas>
   </article>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/paper.js/0.12.2/paper-full.js"></script>
   <script src="facepointer.js"></script>
+  <script src="sandbox.js"></script>
 </body>
 </html>
