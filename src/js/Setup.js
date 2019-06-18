@@ -32,6 +32,13 @@ Facepointer.prototype.cleanConfig = function (config) {
     },
     // Configs specific to plugins
     plugin: {
+      click: {
+        // Morphs to watch for and their required confidences
+        morphs: {
+          0: .35,
+          1: .35
+        }
+      },
       vertScroll: {
         // The multiplier to scroll by. Lower numbers are slower
         scrollSpeed: .15,

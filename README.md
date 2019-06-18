@@ -199,6 +199,14 @@ let config = {
 
   // Configs specific to plugins
   plugin: {
+    click: {
+      // Morphs to watch for and their required confidences
+      morphs: {
+        0: .5,
+        1: .5
+      }
+    },
+    
     vertScroll: {
       // The multiplier to scroll by. Lower numbers are slower
       scrollSpeed: .15,
@@ -210,6 +218,25 @@ let config = {
 
 const fp = new Facepointer(config)
 ```
+
+## Morphs
+
+The following morph values are available on `fp.head.morphs`
+
+```
+0: smileRight → closed mouth smile right
+1: smileLeft → closed mouth smile left
+2: eyeBrowLeftDown → eyebrow left frowned
+3: eyeBrowRightDown → eyebrow right frowned
+4: eyeBrowLeftUp → eyebrow left up (surprised)
+5: eyeBrowRightUp → eyebrow right up (surprised)
+6: mouthOpen → mouth open
+7: mouthRound → mouth round
+8: eyeRightClose → close right eye
+9: eyeLeftClose → close left eye
+10: mouthNasty → mouth nasty (upper lip raised)
+```
+
 
 ---
 

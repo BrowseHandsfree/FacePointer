@@ -1,10 +1,11 @@
-$pointerSize = 20px
+$pointerSize = 15px
 
 .facepointer-pointer
   width $pointerSize
   height $pointerSize
   border-radius $pointerSize
   background red
+  border 3px solid red
   position fixed
   top 0
   left 0
@@ -40,3 +41,7 @@ $pointerSize = 20px
     display block
     &a, &button, &span
       display inline-block
+
+// Clicked state
+body.facepointer-clicked .facepointer-pointer
+  background #ff0
