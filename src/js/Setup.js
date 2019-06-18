@@ -35,8 +35,8 @@ Facepointer.prototype.cleanConfig = function (config) {
       click: {
         // Morphs to watch for and their required confidences
         morphs: {
-          0: .35,
-          1: .35
+          0: .25,
+          1: .25
         }
       },
       vertScroll: {

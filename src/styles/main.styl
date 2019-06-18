@@ -45,3 +45,10 @@ $pointerSize = 15px
 // Clicked state
 body.facepointer-clicked .facepointer-pointer
   background #ff0
+  animation shadow-pulse 0.15s 1
+
+@keyframes shadow-pulse
+  0%
+    box-shadow 0 0 0 $pointerSize rgba(255, 0, 0, 0.45)
+  100%
+    box-shadow 0 0 0 $pointerSize * 5 rgba(255, 0, 0, 0)
