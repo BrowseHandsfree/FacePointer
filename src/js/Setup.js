@@ -60,7 +60,8 @@ Facepointer.prototype.initProps = function () {
   this.pointer = {
     x: 0,
     y: 0,
-    $el: null
+    $el: null,
+    state: ''
   }
   this.tween = {
     x: -1,
