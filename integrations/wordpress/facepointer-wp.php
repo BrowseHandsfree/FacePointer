@@ -34,10 +34,16 @@ function facepointer_shortcode ($atts, $content = '') {
   $post = get_post($atts['id']);
   setup_postdata($post);
 
-  // Add JavaScript once
+  // Add JavaScript and CSS once
   if (!array_key_exists($atts['id'], $facepointerPlugins)) {
     $facepointerPlugins[$atts['id']] = true;
-    $content .= '<script>window.addEventListener("load", () => {' . get_field('javascript') . '})</script>';
+
+    if ($js = get_field('javascript')) {
+      $content .= '<script>window.addEventListener("load", () => {' . $js . '})</script>';
+    }
+    if ($css = get_field('css')) {
+      $content .= '<style>' . $css . '</style>';      
+    }
   }
 
   // Add depedencies once
@@ -47,7 +53,12 @@ function facepointer_shortcode ($atts, $content = '') {
       $dep = get_sub_field('dependency');
       if (!array_key_exists($dep, $facepointerDependencies)) {
         $facepointerDependencies[$dep] = true;
-        $content .= '<script src="' . $dep . '"></script>';
+
+        if (strpos($dep, '.js')) {
+          $content .= '<script src="' . $dep . '"></script>';
+        } elseif (strpos($dep, '.css')) {
+          $content .= '<link rel="stylesheet" type="text/css" href="' . $dep . '"></script>';
+        }
       }
     }
   }
