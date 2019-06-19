@@ -25,17 +25,19 @@ add_action('wp_enqueue_scripts', 'facepointer_scripts');
  */
 function facepointer_shortcode ($atts, $content = '') {
   global $post;
+  global $facepointerPlugins;
+  global $facepointerDependencies;
   
   $atts = shortcode_atts([
     'id' => 0
-  ]);
+  ], $atts);
   $post = get_post($atts['id']);
   setup_postdata($post);
 
   // Add JavaScript once
-  if (!$facepointerPlugins[$atts['id']]) {
+  if (!array_key_exists($atts['id'], $facepointerPlugins)) {
     $facepointerPlugins[$atts['id']] = true;
-    $content .= '<script>' . get_field('javascript') . '</script>';
+    $content .= '<script>window.addEventListener("load", () => {' . get_field('javascript') . '})</script>';
   }
 
   // Add depedencies once
@@ -43,7 +45,7 @@ function facepointer_shortcode ($atts, $content = '') {
     while (have_rows('dependencies')) {
       the_row();
       $dep = get_sub_field('dependency');
-      if (!$facepointerDependencies[$dep]) {
+      if (!array_key_exists($dep, $facepointerDependencies)) {
         $facepointerDependencies[$dep] = true;
         $content .= '<script src="' . $dep . '"></script>';
       }
@@ -51,7 +53,7 @@ function facepointer_shortcode ($atts, $content = '') {
   }
   
   // Add HTML and output
-  $content .= $html;
+  $content .= get_field('html');
   return $content;
 }
 add_shortcode('facepointer', 'facepointer_shortcode');
