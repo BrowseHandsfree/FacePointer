@@ -149,7 +149,9 @@ fp.pointer = {
   x: 0,
   y: 0,
   // The pointer DIV element
-  $el: null
+  $el: null,
+  // The pointer state ('mouseDown', 'mouseDrag', 'mouseUp', '')
+  state: ''
 }
 
 // The original config object passed during instantiation
@@ -170,6 +172,9 @@ fp.trackerSDK = null
 
 // Whether we're tracking or not
 fp.isStarted = false
+
+// Contains a collection of callbacks to call on every frame
+fp.plugins = []
 ```
 
 ---
@@ -192,11 +197,65 @@ let config = {
     factor: 1,
     // Number of frames to stabilizer over
     buffer: 30
+  },
+
+  // Configs specific to plugins
+  plugin: {
+    click: {
+      // Morphs to watch for and their required confidences
+      morphs: {
+        0: .5,
+        1: .5
+      }
+    },
+    
+    vertScroll: {
+      // The multiplier to scroll by. Lower numbers are slower
+      scrollSpeed: .15,
+      // How many pixels from the the edge to scroll
+      scrollZone: 100
+    }
   }
 }
 
 const fp = new Facepointer(config)
 ```
+
+## Morphs
+
+The following morph values are available on `fp.head.morphs`
+
+```
+0: smileRight → closed mouth smile right
+1: smileLeft → closed mouth smile left
+2: eyeBrowLeftDown → eyebrow left frowned
+3: eyeBrowRightDown → eyebrow right frowned
+4: eyeBrowLeftUp → eyebrow left up (surprised)
+5: eyeBrowRightUp → eyebrow right up (surprised)
+6: mouthOpen → mouth open
+7: mouthRound → mouth round
+8: eyeRightClose → close right eye
+9: eyeLeftClose → close left eye
+10: mouthNasty → mouth nasty (upper lip raised)
+```
+
+
+---
+
+# Adding Functionality
+
+Using `Facepointer.use(name, callback)` adds a `callback` to be called on every inference loop for every instance. We call these plugins. The plugin recieves `(pointer, fp)` - `pointer` is the pointers current `(x,y)` and `fp` is the Facepointer instance (use `fp.head` to get that instances head pose data, for example). Here's a basic example of scrolling the page:
+
+```js
+Facepointer.use('verticalScroll', (pointer, fp) => {
+  if (pointer.y < 100)
+    window.scrollTo(0, window.scrollY + pointer.y)
+  if (pointer.y > window.innerHeight)
+    window.scrollTo(0, window.scrollY + (pointer.y - window.innerHeight))
+})
+```
+
+Using `Facepointer.use()` with the same plugin name overwrites the existing one.
 
 ---
 

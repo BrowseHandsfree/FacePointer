@@ -1,5 +1,3 @@
-const Facepointer = window.Facepointer
-
 /**
  * Entry point to setting up this instance
  */
@@ -31,6 +29,22 @@ Facepointer.prototype.cleanConfig = function (config) {
       factor: 1,
       // Number of frames to stabilizer over
       buffer: 30
+    },
+    // Configs specific to plugins
+    plugin: {
+      click: {
+        // Morphs to watch for and their required confidences
+        morphs: {
+          0: .25,
+          1: .25
+        }
+      },
+      vertScroll: {
+        // The multiplier to scroll by. Lower numbers are slower
+        scrollSpeed: .15,
+        // How many pixels from the the edge to scroll
+        scrollZone: 100
+      }
     }
   }, config)
   this.config = config
@@ -46,7 +60,8 @@ Facepointer.prototype.initProps = function () {
   this.pointer = {
     x: 0,
     y: 0,
-    $el: null
+    $el: null,
+    state: ''
   }
   this.tween = {
     x: -1,
