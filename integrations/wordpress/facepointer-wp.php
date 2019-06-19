@@ -54,4 +54,4 @@ function facepointer_shortcode ($atts, $content = '') {
   $content .= $html;
   return $content;
 }
-add_action('facepointer', 'facepointer_shortcode');
+add_shortcode('facepointer', 'facepointer_shortcode');
