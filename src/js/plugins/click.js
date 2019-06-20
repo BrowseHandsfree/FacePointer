@@ -1,8 +1,10 @@
 /**
- * Scrolls the page vertically
+ * Click on things
  */
-let mouseDowned = false
-let mouseDown = false
+// Number of frames mouse has been downed
+let mouseDowned = 0
+// Max number of frames to keep down
+let maxMouseDownedFrames = 5
 let mouseDrag = false
 let mouseUp = false
 let thresholdMet = false
@@ -17,30 +19,23 @@ Facepointer.use('click', (pointer, fp) => {
   })
 
   if (thresholdMet) {
-    mouseDrag = mouseDowned
-
-    // Every frame after first frame of click
-    if (mouseDowned) {
-      mouseDown = false
-    } else {
-      mouseDowned = true
-      mouseDown = true
-    }
+    mouseDowned++
     document.body.classList.add('facepointer-clicked')
   } else {
     mouseUp = mouseDowned
-    mouseDowned = mouseDrag = mouseDown = false
+    mouseDowned = 0
+    mouseDrag = mouseDown = false
     document.body.classList.remove('facepointer-clicked')
   }
 
   // Set the state
-  if (mouseDown) fp.pointer.state = 'mouseDown'
+  if (mouseDowned > 0 && mouseDowned < maxMouseDownedFrames) fp.pointer.state = 'mouseDown'
+  else if (mouseDowned > maxMouseDownedFrames) fp.pointer.state = 'mouseDrag'
   else if (mouseUp) fp.pointer.state = 'mouseUp'
-  else if (mouseDrag) fp.pointer.state = 'mouseDrag'
   else ''
 
   // Actually click something (or focus it)
-  if (mouseDowned) {
+  if (fp.pointer.state === 'mouseDown') {
     const $el = document.elementFromPoint(pointer.x, pointer.y)
     if ($el) {
       $el.dispatchEvent(new MouseEvent('click', {

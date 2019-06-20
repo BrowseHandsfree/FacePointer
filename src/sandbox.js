@@ -1,6 +1,6 @@
 /**
  * Facepointer plugin for drawing into Paper with face
- * - Adds `Facepointer_ReinitPaper()` to window. Call this method to clear the canvas
+ * - Adds `Facepointer_paperClear()` to window. Call this method to clear the canvas
  * 
  * @see http://paperjs.org/
  */
@@ -11,7 +11,7 @@ window.addEventListener('load', () => {
   let tool
   let lastPoint
   
-  Facepointer.use('paper-demo', pointer => {
+  Facepointer.use('paper-demo', (pointer, fp) => {
     /**
      * Click
      */
@@ -47,6 +47,13 @@ window.addEventListener('load', () => {
         lastPoint = getPoint(pointer)
       }
     }
+
+    /**
+     * Clear screen
+     */
+    if (fp.head.morphs[4] > 0.25 && fp.head.morphs[5] > 0.25) {
+      window.Facepointer_paperClear()
+    }
   })
   
   /**
@@ -64,11 +71,8 @@ window.addEventListener('load', () => {
   /**
    * Renitialize Paper.js
    */
-  window.Facepointer_ReinitPaper = function () {
-    paper.setup($canvas)
-    path = new paper.Path()
-    tool = new paper.Tool()
-    tool.minDistance = 20  
+  window.Facepointer_paperClear = function () {
+    paper.project.clear()
   }
   
   /**
