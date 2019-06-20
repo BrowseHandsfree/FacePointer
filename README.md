@@ -26,8 +26,8 @@ To use Facepointer in your projects add the following to your projects `<head>`:
 That will pull the latest build. If you'd like to instead use a specific version, use something like:
 
 ```html
-<link rel="stylesheet" href="https://unpkg.com/facepointer@0.0.3/dist/facepointer.css">
-<script defer src="https://unpkg.com/facepointer@0.0.3/dist/facepointer.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/facepointer@0.0.10/dist/facepointer.css">
+<script defer src="https://unpkg.com/facepointer@0.0.10/dist/facepointer.js"></script>
 ```
 
 ## .facepointer-start
